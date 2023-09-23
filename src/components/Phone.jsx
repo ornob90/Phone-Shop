@@ -1,8 +1,13 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { deleteFavFromLS } from "../utilities/localStorage";
 
-const Phone = ({ phone, pageName }) => {
+const Phone = ({ phone, pageName, setFavPhones }) => {
   const { id, image, phone_name, brand_name, price, rating } = phone;
+
+  const handleRemoveFav = () => {
+    setFavPhones(deleteFavFromLS(id));
+  };
 
   return (
     <div className="text-white font-bold text-md grid grid-cols-1 p-5 rounded-lg">
@@ -21,9 +26,15 @@ const Phone = ({ phone, pageName }) => {
             $<span>{price}</span>
           </p>
         </div>
-        <NavLink to={`phone/${id}`}>
-          <button className="btn btn-primary">See Details</button>
-        </NavLink>
+        {pageName !== "favorite" ? (
+          <NavLink to={`phone/${id}`}>
+            <button className="btn btn-primary">See Details</button>
+          </NavLink>
+        ) : (
+          <button onClick={handleRemoveFav} className="btn btn-primary">
+            Remove
+          </button>
+        )}
       </div>
     </div>
   );

@@ -5,25 +5,32 @@ import Phone from "../components/Phone";
 
 const Favorite = () => {
   const [favPhones, setFavPhones] = useState([]);
-  const [phones, setPhones] = useState([]);
+  //   const [phones, setPhones] = useState([]);
 
-  useEffect(() => {
-    fetch("phone.json")
-      .then((res) => res.json())
-      .then((data) => setPhones(data));
-  }, []);
+  //   useEffect(() => {
+  //     fetch("phone.json")
+  //       .then((res) => res.json())
+  //       .then((data) => setPhones(data));
+  //   }, []);
+
+  const phones = useLoaderData();
 
   useEffect(() => {
     console.log(phones);
     const favPhonesID = getFavFromLS();
     const favPhones = phones.filter((phone) => favPhonesID.includes(phone.id));
     setFavPhones(favPhones);
-  }, [phones]);
+  }, [favPhones, phones]);
 
   return (
     <div className="max-w-[1440px] mx-auto w-[90%] grid grid-cols-4">
       {favPhones.map((phone) => (
-        <Phone key={phone.id} phone={phone} pageName="favorite" />
+        <Phone
+          key={phone.id}
+          phone={phone}
+          pageName="favorite"
+          setFavPhones={setFavPhones}
+        />
       ))}
     </div>
   );

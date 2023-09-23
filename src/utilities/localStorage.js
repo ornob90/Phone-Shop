@@ -17,8 +17,7 @@ export const addFavInLS = (id) => {
 
 export const deleteFavFromLS = (id) => {
   const favorites = getFavFromLS();
-
-  const newFavorites = favorites.filter((phone) => phone.id !== id);
-
+  const newFavorites = favorites.filter((phoneId) => phoneId !== id);
   localStorage.setItem("favorites", JSON.stringify(newFavorites));
+  return newFavorites;
 };
