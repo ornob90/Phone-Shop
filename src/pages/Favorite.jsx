@@ -14,28 +14,39 @@ const Favorite = () => {
       .then((data) => setPhones(data));
   }, []);
 
-  //   const phones = useLoaderData();
+  // const phones = useLoaderData();
 
   useEffect(() => {
     const favPhonesID = getFavFromLS();
     const favPhones = phones.filter((phone) => favPhonesID.includes(phone.id));
+    handleTotalPrice(favPhones);
     setFavPhones(favPhones);
-    console.log(phones);
   }, [phones]);
+
+  const handleTotalPrice = (favPhones) => {
+    if (favPhones.length > 0) {
+      const total = favPhones.reduce((acc, cur) => acc + cur.price, 0);
+      setTotalPrice(total);
+    } else {
+      setTotalPrice(0);
+    }
+  };
 
   const handleRemoveFromFav = (id) => {
     deleteFavFromLS(id);
     // Update the favPhones state to trigger a re-render
-    setFavPhones((prevFavPhones) =>
-      prevFavPhones.filter((phone) => phone.id !== id)
-    );
+    setFavPhones((prevFavPhones) => {
+      const newFav = prevFavPhones.filter((phone) => phone.id !== id);
+      handleTotalPrice(newFav);
+      return newFav;
+    });
   };
 
   return (
     <div className="max-w-[1440px] mx-auto w-[90%] ">
       <div className="flex justify-center">
-        <h1 className="w-max text-3xl pt-10 mb-5 border-b-orange-700 border-b-2 text-white font-bold text-center">
-          5000$
+        <h1 className="pt-10 mb-5 text-3xl font-bold text-center text-white border-b-2 w-max border-b-orange-700">
+          {totalPrice}$
         </h1>
       </div>
 
