@@ -2,16 +2,17 @@ export const getFavFromLS = () => {
   const favorites = localStorage.getItem("favorites");
 
   if (favorites) {
-    return favorites;
+    return JSON.parse(favorites);
+  } else {
+    return [];
   }
-  return [];
 };
 
 export const addFavInLS = (id) => {
   const favorites = getFavFromLS();
 
   favorites.push(id);
-  localStorage.setItem("favorites", favorites);
+  localStorage.setItem("favorites", JSON.stringify(favorites));
 };
 
 export const deleteFavFromLS = (id) => {
@@ -19,5 +20,5 @@ export const deleteFavFromLS = (id) => {
 
   const newFavorites = favorites.filter((phone) => phone.id !== id);
 
-  localStorage.setItem("favorites", newFavorites);
+  localStorage.setItem("favorites", JSON.stringify(newFavorites));
 };
