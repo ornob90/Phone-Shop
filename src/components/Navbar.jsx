@@ -15,7 +15,7 @@ const Navbar = () => {
             className={({ isActive }) =>
               `font-medium text-xl ${
                 isActive
-                  ? " text-yellow-500 border-b-2 border-black"
+                  ? " text-yellow-500 border-b-2 border-white"
                   : "text-white"
               }`
             }
@@ -28,7 +28,7 @@ const Navbar = () => {
             className={({ isActive }) =>
               `font-medium text-xl ${
                 isActive
-                  ? " text-yellow-500 border-b-2 border-black"
+                  ? " text-yellow-500 border-b-2 border-white"
                   : "text-white"
               }`
             }
@@ -41,7 +41,7 @@ const Navbar = () => {
             className={({ isActive }) =>
               `font-medium text-xl ${
                 isActive
-                  ? " text-yellow-500 border-b-2 border-black"
+                  ? " text-yellow-500 border-b-2 border-white"
                   : "text-white"
               }`
             }
