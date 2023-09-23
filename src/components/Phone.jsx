@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-const Phone = ({ phone }) => {
+const Phone = ({ phone, pageName }) => {
   const { id, image, phone_name, brand_name, price, rating } = phone;
 
   return (
